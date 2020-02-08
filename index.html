@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Page Title</title>
+  <meta charset="UTF-8"/>
+</head>
+<body>
+  <script>
+    // Randomly select Rock, Paper, or Scissors
+    function computerPlay() {
+      let options = ["Rock", "Paper", "Scissors"];
+      return options[Math.floor(Math.random() * options.length)]; 
+    }
+    
+    function play(playerSelection, computerSelection) {
+      if (playerSelection.toUpperCase() === "ROCK") {
+        playerSelection = "ROCK";
+      } else if (playerSelection.toUpperCase() === "PAPER") {
+        playerSelection = "PAPER";
+      } else if (playerSelection.toUpperCase() === "SCISSORS") {
+        playerSelection = "SCISSORS";
+      } else {
+        alert('Must Select Rock, Paper, or Scissors!');
+        return;
+      }
+      computerSelection = computerSelection.toUpperCase();
+      if (playerSelection === "ROCK") {
+        switch (computerSelection) {
+          case "ROCK":
+            alert(`Tie! ${playerSelection} and ${computerSelection}`);
+            return 0;
+            break;
+          case "PAPER":
+            alert(`LOSE! ${playerSelection} is trounced by ${computerSelection}`);
+            return 1;
+            break;
+          case "SCISSORS":
+            alert(`WIN! ${playerSelection} dominates ${computerSelection}`);
+            return 2;
+            break;
+        }
+      }
+      if (playerSelection === "PAPER") {
+        switch (computerSelection) {
+          case "PAPER":
+            alert(`Tie! ${playerSelection} and ${computerSelection}`);
+            return 0;
+            break;
+          case "SCISSORS":
+            alert(`LOSE! ${playerSelection} is trounced by ${computerSelection}`);
+            return 1;
+            break;
+          case "ROCK":
+            alert(`WIN! ${playerSelection} dominates ${computerSelection}`);
+            return 2;
+            break;
+        }
+      }
+      if (playerSelection === "SCISSORS") {
+        switch (computerSelection) {
+          case "SCISSORS":
+            alert(`Tie! ${playerSelection} and ${computerSelection}`);
+            return 0;
+            break;
+          case "ROCK":
+            alert(`LOSE! ${playerSelection} is trounced by ${computerSelection}`);
+            return 1;
+            break;
+          case "PAPER":
+            alert(`WIN! ${playerSelection} dominates ${computerSelection}`);
+            return 2;
+            break;
+        }
+      }
+
+    }
+
+    function game() {
+      let humanScore = 0;
+      let computerScore = 0;
+      for (let i = 0; i < 5; i++) {
+        let choice = prompt("Rock, Paper, or Scissors?");
+        switch (play(choice,computerPlay())) {
+          case 0:
+            console.log(`Human score is ${humanScore}. Computer Score is ${computerScore}`)
+            break;
+          case 1:
+            console.log(`Human score is ${humanScore}. Computer Score is ${++computerScore}`)
+            break;
+          case 2:
+            console.log(`Human score is ${++humanScore}. Computer Score is ${computerScore}`)
+            break;
+        }
+      }
+      if (humanScore > computerScore) {
+        alert("Man defeats Machine");
+      }
+      else if (computerScore > humanScore) {
+        alert("Machine defeats Man");
+      }
+      else {
+        alert("It is a draw");
+      }
+
+
+    }
+      
+    
+
+
+  </script>
+</body>
+</html>
