@@ -5,13 +5,35 @@
   <meta charset="UTF-8"/>
 </head>
 <body>
+  <div class="buttons">
+    <button id="ROCK" value="ROCK" type="button">ROCK</button>
+    <button id="PAPER" value="PAPER" type="button">PAPER</button>
+    <button id="SCISSORS" value="SCISSORS" type="button">SCISSORS</button>
+  </div>  
+  <span id="score">
+    Score be Human:
+    <span id="human">0</span>
+    Computer:
+    <span id="computer">0</span>
+  </div>
   <script>
+    document.getElementById("ROCK").addEventListener("click", function() {
+      play("ROCK", computerPlay());
+    }); 
+    document.getElementById("PAPER").addEventListener("click", function() {
+      play("PAPER", computerPlay());
+    }); 
+    document.getElementById("SCISSORS").addEventListener("click", function() {
+      play("SCISSORS", computerPlay());
+    }); 
+
     // Randomly select Rock, Paper, or Scissors
     function computerPlay() {
       let options = ["Rock", "Paper", "Scissors"];
       return options[Math.floor(Math.random() * options.length)]; 
     }
-    
+    let humanScore= 0;
+    let computerScore = 0;
     function play(playerSelection, computerSelection) {
       if (playerSelection.toUpperCase() === "ROCK") {
         playerSelection = "ROCK";
@@ -28,15 +50,16 @@
         switch (computerSelection) {
           case "ROCK":
             alert(`Tie! ${playerSelection} and ${computerSelection}`);
-            return 0;
             break;
           case "PAPER":
             alert(`LOSE! ${playerSelection} is trounced by ${computerSelection}`);
-            return 1;
+            computerScore++;
+            document.getElementById("computer").innerHTML = computerScore;
             break;
           case "SCISSORS":
             alert(`WIN! ${playerSelection} dominates ${computerSelection}`);
-            return 2;
+            humanScore++;
+            document.getElementById("human").innerHTML = humanScore;
             break;
         }
       }
@@ -48,11 +71,13 @@
             break;
           case "SCISSORS":
             alert(`LOSE! ${playerSelection} is trounced by ${computerSelection}`);
-            return 1;
+            computerScore++;
+            document.getElementById("computer").innerHTML = computerScore;
             break;
           case "ROCK":
             alert(`WIN! ${playerSelection} dominates ${computerSelection}`);
-            return 2;
+            humanScore++;
+            document.getElementById("human").innerHTML = humanScore;
             break;
         }
       }
@@ -64,48 +89,34 @@
             break;
           case "ROCK":
             alert(`LOSE! ${playerSelection} is trounced by ${computerSelection}`);
-            return 1;
+            computerScore++;
+            document.getElementById("computer").innerHTML = computerScore;
             break;
           case "PAPER":
             alert(`WIN! ${playerSelection} dominates ${computerSelection}`);
-            return 2;
+            humanScore++;
+            document.getElementById("human").innerHTML = humanScore;
             break;
         }
       }
+      if (humanScore >= 5) {
+        alert("Congratulations, you win! With a score of " + humanScore + " to " + computerScore);
+        humanScore = 0;
+        computerScore = 0;
+        document.getElementById("computer").innerHTML = computerScore;
+        document.getElementById("human").innerHTML = humanScore;
+      }
 
+      if (computerScore >= 5) {
+        alert("Sorry, you lose! With a score of " + humanScore + " to " + computerScore);
+        humanScore = 0;
+        computerScore = 0;
+        document.getElementById("computer").innerHTML = computerScore;
+        document.getElementById("human").innerHTML = humanScore;
+      }
     }
-
-    function game() {
-      let humanScore = 0;
-      let computerScore = 0;
-      for (let i = 0; i < 5; i++) {
-        let choice = prompt("Rock, Paper, or Scissors?");
-        switch (play(choice,computerPlay())) {
-          case 0:
-            console.log(`Human score is ${humanScore}. Computer Score is ${computerScore}`)
-            break;
-          case 1:
-            console.log(`Human score is ${humanScore}. Computer Score is ${++computerScore}`)
-            break;
-          case 2:
-            console.log(`Human score is ${++humanScore}. Computer Score is ${computerScore}`)
-            break;
-        }
-      }
-      if (humanScore > computerScore) {
-        alert("Man defeats Machine");
-      }
-      else if (computerScore > humanScore) {
-        alert("Machine defeats Man");
-      }
-      else {
-        alert("It is a draw");
-      }
-
-
-    }
-      
-    
+  
+  
 
 
   </script>
